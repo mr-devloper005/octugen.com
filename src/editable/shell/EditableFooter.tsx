@@ -12,7 +12,7 @@ export function EditableFooter() {
 
   return (
     <footer className="border-t border-[var(--editable-border)] bg-[var(--editable-footer-bg)] text-[var(--editable-footer-text)]">
-      <div className="mx-auto grid max-w-[var(--editable-container)] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr_0.85fr_0.95fr] lg:px-8">
+      <div className="mx-auto grid max-w-[var(--editable-container)] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_1fr] lg:items-start lg:px-8">
         <div className="rounded-[5rem] border border-[var(--editable-border)] bg-[var(--slot4-surface-bg)] p-6">
           <Link href="/" className="inline-flex items-center gap-3">
             <img src="/favicon.png?v=20260413" alt={SITE_CONFIG.name} className="h-12 w-12 object-contain" />
