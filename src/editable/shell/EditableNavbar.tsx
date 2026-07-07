@@ -22,9 +22,12 @@ export function EditableNavbar() {
   )
 
   const topCategories = useMemo(() => {
-    const taskLabels = navItems.map((item) => item.label)
-    const extra = quickCategoryNames.filter((label) => !taskLabels.includes(label))
-    return [...navItems.map((item) => item.label), ...extra].slice(0, 7)
+    const taskEntries = navItems.map((item) => ({ label: item.label, href: item.href }))
+    const taskLabels = new Set(taskEntries.map((entry) => entry.label))
+    const extras = quickCategoryNames
+      .filter((label) => !taskLabels.has(label))
+      .map((label) => ({ label, href: `/search?q=${encodeURIComponent(label)}` }))
+    return [...taskEntries, ...extras].slice(0, 7)
   }, [navItems])
 
   return (
@@ -67,7 +70,7 @@ export function EditableNavbar() {
               Login
             </Link>
           )}
-          <Link href="/create" className="inline-flex items-center gap-2 rounded-full border border-[var(--slot4-accent-fill)] bg-[linear-gradient(90deg,var(--slot4-cream)_0_28%,var(--editable-cta-bg)_28%_100%)] px-5 py-3 text-sm font-bold text-[var(--editable-cta-text)] transition hover:-translate-y-0.5">
+          <Link href="/create" className="inline-flex items-center gap-2 rounded-full bg-[var(--slot4-accent-fill)] px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[var(--slot4-page-text)] shadow-[0_6px_20px_rgba(70,132,50,0.35)] transition hover:-translate-y-0.5 hover:brightness-110">
             <Plus className="h-4 w-4" />
             SELL
           </Link>
@@ -82,6 +85,27 @@ export function EditableNavbar() {
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </nav>
+
+      <div className="hidden border-t border-[var(--editable-border)] bg-[var(--slot4-surface-bg)]/60 md:block">
+        <div className="mx-auto flex w-full max-w-[var(--editable-container)] items-center gap-1 overflow-x-auto px-3 py-2 sm:px-6 lg:px-8">
+          {topCategories.map((cat) => {
+            const active = pathname === cat.href
+            return (
+              <Link
+                key={cat.label}
+                href={cat.href}
+                className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                  active
+                    ? 'bg-[var(--slot4-accent-soft)] text-[var(--slot4-accent)]'
+                    : 'text-[var(--slot4-muted-text)] hover:bg-[var(--slot4-panel-bg)] hover:text-[var(--slot4-page-text)]'
+                }`}
+              >
+                {cat.label}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
 
       {open ? (
         <div className="border-t border-[var(--editable-border)] bg-[var(--slot4-surface-bg)] px-4 py-5 md:hidden">

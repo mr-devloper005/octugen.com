@@ -262,9 +262,6 @@ export function EditableStoryRail({ primaryTask, primaryRoute, posts }: HomeSect
             <h2 className="editable-display text-3xl font-semibold text-[var(--slot4-page-text)]">Top categories</h2>
             <p className="mt-2 text-sm text-[var(--slot4-muted-text)]">Jump into the sections people browse the most.</p>
           </div>
-          <Link href={primaryRoute} className="hidden items-center gap-2 text-sm font-semibold text-[var(--slot4-accent)] sm:inline-flex">
-            Browse all <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">

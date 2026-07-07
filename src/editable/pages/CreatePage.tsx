@@ -29,8 +29,8 @@ const tone = {
   muted: 'text-[var(--slot4-muted-text)]',
 }
 
-const fieldClass = 'rounded-sm border border-[var(--editable-border)] bg-[var(--slot4-page-bg)] px-4 py-3 text-sm font-medium text-[var(--slot4-page-text)] outline-none transition placeholder:text-[var(--slot4-soft-muted-text)] focus:border-[var(--slot4-accent)]'
-const buttonClass = 'inline-flex h-12 w-full items-center justify-center gap-2 rounded-sm bg-[var(--slot4-accent)] px-6 text-sm font-bold uppercase tracking-[0.18em] text-[var(--slot4-on-accent)] transition hover:brightness-95'
+const fieldClass = 'rounded-sm border border-[var(--editable-border)] bg-[#0b0f0a] px-4 py-3 text-sm font-medium text-[var(--slot4-page-text)] outline-none transition placeholder:text-[var(--slot4-soft-muted-text)] focus:border-[var(--slot4-accent)]'
+const buttonClass = 'inline-flex h-12 w-full items-center justify-center gap-2 rounded-sm bg-[var(--slot4-accent-fill)] px-6 text-sm font-bold uppercase tracking-[0.18em] text-[var(--slot4-page-text)] transition hover:brightness-110'
 
 const saveDraft = (draft: DraftPost) => {
   try {
@@ -109,12 +109,45 @@ export default function CreatePage() {
   return (
     <EditableSiteShell className={tone.shell}>
       <main className="px-4 py-14 sm:px-6 lg:px-8">
-        <section className="mx-auto grid max-w-[var(--editable-container)] gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-          <aside>
-            <article className={`${tone.panel} p-8 lg:p-10`}>
+        <section className="mx-auto grid max-w-[var(--editable-container)] gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+          <aside className="h-full">
+            <article className={`${tone.panel} flex h-full flex-col p-8 lg:p-10`}>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--slot4-accent)]">{pagesContent.create.hero.badge}</p>
               <h1 className="editable-display mt-5 max-w-lg text-5xl font-semibold tracking-[-0.02em]">{pagesContent.create.hero.title}</h1>
               <p className={`mt-5 max-w-xl text-base leading-8 ${tone.muted}`}>{pagesContent.create.hero.description}</p>
+
+              <div className="mt-8 border-t border-[var(--editable-border)] pt-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--slot4-accent)]">Publishing checklist</p>
+                <ul className="mt-4 space-y-3">
+                  {[
+                    'Give the post a clear, specific title.',
+                    'Pick a category so readers can find it later.',
+                    'Add a featured image URL for stronger cards.',
+                    'Write a short summary — it appears on listings.',
+                    'Fill in the main content with the full details.',
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm leading-6 text-[var(--slot4-page-text)]">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--slot4-accent)]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-8 border-t border-[var(--editable-border)] pt-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--slot4-accent)]">Active sections</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {enabledTasks.map((t) => (
+                    <span key={t.key} className="rounded-full border border-[var(--editable-border)] bg-[var(--slot4-panel-bg)] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--slot4-page-text)]">
+                      {t.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className={`mt-auto pt-8 text-xs leading-6 ${tone.muted}`}>
+                Submissions are saved as drafts to your account and reviewed before appearing on the site.
+              </div>
             </article>
           </aside>
 
