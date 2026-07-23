@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowUpRight, Bookmark, Building2, Camera, CheckCircle2, Download, ExternalLink, FileText, Globe2, Mail, MapPin, Phone, Star, Tag, UserRound } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Bookmark, Building2, Camera, CheckCircle2, Download, ExternalLink, FileText, Mail, MapPin, Phone, Star, Tag, UserRound } from 'lucide-react'
 import { buildPostMetadata, buildTaskMetadata } from '@/lib/seo'
 import { fetchArticleComments, fetchTaskPostBySlug, fetchTaskPosts } from '@/lib/task-data'
 import { getTaskConfig, SITE_CONFIG, type TaskKey } from '@/lib/site-config'
@@ -233,7 +233,7 @@ function ListingDetail({ post, related }: { post: SitePost; related: SitePost[] 
                 <DetailMeta post={post} category={categoryOf(post, 'Business')} />
                 {leadText(post) ? <p className="mt-5 text-base leading-8 text-[var(--tk-muted)]">{leadText(post)}</p> : null}
                 <div className="mt-6 grid gap-3">
-                  <BadgeLine label="Location" value={getField(post, ['location', 'address', 'city']) || 'See detail section'} />
+                  <BadgeLine label="Location" value={getField(post, ['address', 'location', 'city']) || 'See detail section'} />
                   {getField(post, ['phone', 'telephone', 'mobile']) ? <BadgeLine label="Phone" value={getField(post, ['phone', 'telephone', 'mobile'])} /> : null}
                   {getField(post, ['website', 'url']) ? <BadgeLine label="Website" value={getField(post, ['website', 'url'])} /> : null}
                 </div>
@@ -251,8 +251,7 @@ function ListingDetail({ post, related }: { post: SitePost; related: SitePost[] 
             <div className="mx-auto max-w-6xl px-4 py-6">
               <Ads slot="sidebar" showLabel eager className="mx-auto w-full" />
             </div>
-            {mapSrc ? <MapBox src={mapSrc} label={getField(post, ['location', 'address', 'city']) || post.title} /> : null}
-            <InfoPanel title="Business details" rows={[['Category', categoryOf(post, 'Business')], ['Location', getField(post, ['location', 'address', 'city']) || 'Available on request']]} />
+            {mapSrc ? <MapBox src={mapSrc} label={getField(post, ['address', 'location', 'city']) || post.title} /> : null}
             <RelatedPanel task="listing" post={post} related={related} />
           </aside>
         </div>
@@ -276,7 +275,7 @@ function ClassifiedDetail({ post, related }: { post: SitePost; related: SitePost
             <DetailMeta post={post} category={categoryOf(post, 'Listing')} />
             <div className="mt-6 grid gap-3">
               {getField(post, ['condition', 'availability', 'type']) ? <BadgeLine label="Condition" value={getField(post, ['condition', 'availability', 'type'])} /> : null}
-              <BadgeLine label="Location" value={getField(post, ['location', 'address', 'city']) || 'Available on detail page'} />
+              <BadgeLine label="Location" value={getField(post, ['address', 'location', 'city']) || 'Available on detail page'} />
             </div>
             <div className="mt-6">
               <ContactAction website={getField(post, ['website', 'url'])} phone={getField(post, ['phone', 'telephone', 'mobile'])} email={getField(post, ['email'])} />
