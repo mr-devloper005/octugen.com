@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {
-  ArrowRight, BriefcaseBusiness, Building2, Camera, ChevronRight, FileText, Heart,
-  Image as ImageIcon, MapPin, Megaphone, Search, Star, UserRound,
+  ArrowRight, BriefcaseBusiness, Building2, ChevronRight, FileText, Heart,
+  Image as ImageIcon, Megaphone, Search, Star, UserRound,
 } from 'lucide-react'
 import type { SitePost } from '@/lib/site-connector'
 import type { HomeTimeSection } from '@/lib/task-data'
@@ -252,7 +252,7 @@ export function EditableHomeHero({ primaryTask, primaryRoute, posts, timeSection
   )
 }
 
-export function EditableStoryRail({ primaryTask, primaryRoute, posts }: HomeSectionProps) {
+export function EditableStoryRail({ primaryRoute, posts }: HomeSectionProps) {
   const categories = SITE_CONFIG.tasks.filter((task) => task.enabled && !hiddenTaskButtons.includes(task.key))
   return (
     <section className="pt-10">

@@ -8,7 +8,6 @@ import { SITE_CONFIG } from '@/lib/site-config'
 import { globalContent } from '@/editable/content/global.content'
 import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 
-const quickCategoryNames = ['Cars', 'Motorcycles', 'Mobile Phones', 'Properties', 'Services', 'Jobs']
 const hiddenTaskButtons = new Set(['listing', 'classified'])
 
 export function EditableNavbar() {
@@ -20,12 +19,6 @@ export function EditableNavbar() {
     () => SITE_CONFIG.tasks.filter((task) => task.enabled && !hiddenTaskButtons.has(task.key)).map((task) => ({ label: task.label, href: task.route })),
     []
   )
-
-  const topCategories = useMemo(() => {
-    const taskLabels = navItems.map((item) => item.label)
-    const extra = quickCategoryNames.filter((label) => !taskLabels.includes(label))
-    return [...navItems.map((item) => item.label), ...extra].slice(0, 7)
-  }, [navItems])
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--editable-border)] bg-[var(--editable-nav-bg)]/95 text-[var(--editable-nav-text)] backdrop-blur-xl">
